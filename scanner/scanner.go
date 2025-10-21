@@ -2,17 +2,17 @@ package scanner
 
 import (
 	"bufio"
+	"github.com/mdhenriques/go-git-scan/patterns"
 	"os"
 	"path/filepath"
-	"github.com/mdhenriques/go-git-scan/patterns"
 )
 
 type Finding struct {
-	FilePath   string
-	LineNumber int
+	FilePath    string
+	LineNumber  int
 	LineContent string
 	PatternName string
-	Severity string
+	Severity    string
 }
 
 type Scanner struct {
@@ -68,8 +68,8 @@ func (s *Scanner) scanFile(filePath string) ([]Finding, error) {
 		for _, pattern := range s.patterns {
 			if pattern.Regex.MatchString(line) {
 				findings = append(findings, Finding{
-					FilePath:	filePath,
-					LineNumber: lineNumber,
+					FilePath:    filePath,
+					LineNumber:  lineNumber,
 					LineContent: line,
 					PatternName: pattern.Name,
 					Severity:    pattern.Severity,
